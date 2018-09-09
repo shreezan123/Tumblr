@@ -16,6 +16,7 @@
 		F6A192A3213F059B00A9A0FD /* flix_demo_03Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A192A2213F059B00A9A0FD /* flix_demo_03Tests.swift */; };
 		F6A192AE213F059C00A9A0FD /* flix_demo_03UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A192AD213F059C00A9A0FD /* flix_demo_03UITests.swift */; };
 		F6BC7764213F568700260FF0 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BC7763213F568700260FF0 /* PhotosViewController.swift */; };
+		F6EA29F721415A4100CD748E /* PhotoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EA29F621415A4100CD748E /* PhotoDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		F6A192AD213F059C00A9A0FD /* flix_demo_03UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flix_demo_03UITests.swift; sourceTree = "<group>"; };
 		F6A192AF213F059C00A9A0FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6BC7763213F568700260FF0 /* PhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
+		F6EA29F621415A4100CD748E /* PhotoDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,7 @@
 			children = (
 				F64FFCAA213F796000BCB93D /* PhotoCell.swift */,
 				F6BC7763213F568700260FF0 /* PhotosViewController.swift */,
+				F6EA29F621415A4100CD748E /* PhotoDetailsViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6EA29F721415A4100CD748E /* PhotoDetailsViewController.swift in Sources */,
 				F6BC7764213F568700260FF0 /* PhotosViewController.swift in Sources */,
 				F64FFCAB213F796000BCB93D /* PhotoCell.swift in Sources */,
 				F6A1928E213F059B00A9A0FD /* AppDelegate.swift in Sources */,

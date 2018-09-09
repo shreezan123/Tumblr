@@ -10,30 +10,28 @@ import UIKit
 import AlamofireImage
 
 class PhotosViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
-    
     @IBOutlet var tableView: UITableView!
-
+    var globalURL:String!
     var posts: [[String: Any]] = []
-    
+    var refreshControl:UIRefreshControl = UIRefreshControl()
     override func viewDidLoad() {
         super.viewDidLoad()
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
-        tableView.insertSubview(refreshControl, at: 0)
-
         tableView.delegate = self
         tableView.dataSource = self
-        // Network request snippet
-        
-        // Do any additional setup after loading the view.
+        refreshControl.addTarget(self, action: #selector(PhotosViewController.urlActionCaller(_:)), for: .valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
+        networkOperations()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func refreshControlAction(_ refreshControl: UIRefreshControl) {
-        
+    
+    func urlActionCaller(_ refreshControl: UIRefreshControl){
+        networkOperations()
+    }
+    func networkOperations() {
         // ... Create the URLRequest `myRequest` ...
         
         // Configure session so that completion handler is executed on main UI thread
@@ -53,14 +51,27 @@ class PhotosViewController: UIViewController,UITableViewDataSource, UITableViewD
                 self.posts = responseDictionary["posts"] as! [[String: Any]]
                 // TODO: Reload the table view
                 self.tableView.reloadData()
-                refreshControl.endRefreshing()
-                
+                self.refreshControl.endRefreshing()
             }
         }
         task.resume()
-
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        
+        if let indexPath = tableView.indexPath(for: cell){
+            let post = posts[indexPath.row]
+            let photos = post["photos"] as? [[String: Any]]
+            let photo = photos![0]
+            let originalSize = photo["original_size"] as! [String: Any]
+            let urlString = originalSize["url"] as! String
+            let vc = segue.destination as! PhotoDetailsViewController
+            vc.imageURL = urlString
+        }
+        
+    }
+ 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
     }
@@ -80,22 +91,10 @@ class PhotosViewController: UIViewController,UITableViewDataSource, UITableViewD
             let urlString = originalSize["url"] as! String
             // 4.
             let url = URL(string: urlString)
-            
+            self.globalURL = urlString
             cell.photoImageView.af_setImage(withURL: url!)
 
         }
         return cell
     }
-
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
